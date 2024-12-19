@@ -1,17 +1,16 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class BleDevice {
-  final BluetoothDevice bluetoothDevice;
+  final BluetoothDevice peripheral;
   final String name;
   int rssi;
 
-  String get id => bluetoothDevice.id.id;
+  String get id => peripheral.remoteId.str;
 
   BleDevice(ScanResult scanResult)
-      : bluetoothDevice = scanResult.device,
-        // name = scanResult.device.name ?? scanResult.advertisementData.localName ?? "Unknown",
-        name = scanResult.device.name,
+      : peripheral = scanResult.device,
+        name = scanResult.device.platformName,
         rssi = scanResult.rssi;
 
   @override
@@ -20,8 +19,6 @@ class BleDevice {
   @override
   bool operator ==(other) =>
       other is BleDevice &&
-      this.name != null &&
-      other.name != null &&
       compareAsciiLowerCase(this.name, other.name) == 0 &&
       this.id == other.id &&
       this.rssi == other.rssi;
@@ -36,7 +33,7 @@ class BleDevice {
       'id': id,
       'name': name,
       'rssi': rssi,
-      'peripheral': bluetoothDevice,
+      'peripheral': peripheral,
     };
   }
 

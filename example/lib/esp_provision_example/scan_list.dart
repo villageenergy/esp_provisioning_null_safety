@@ -10,14 +10,14 @@ class ScanList extends StatelessWidget {
   final ItemTapCallback? onTap;
   final bool? disableLoading;
 
-  const ScanList(this.items, this.icon, {Key? key, this.onTap, this.disableLoading}) : super(key: key);
+  ScanList(this.items, this.icon, {this.onTap, this.disableLoading});
 
   Widget _buildItem(
       BuildContext _context, Map<String, dynamic> item, IconData icon,
       {ItemTapCallback? onTap}) {
     return ListTile(
         leading: Container(
-          padding: const EdgeInsets.all(4.0),
+          padding: EdgeInsets.all(4.0),
           child: Icon(
             icon,
             color: Colors.blueAccent,
@@ -25,7 +25,9 @@ class ScanList extends StatelessWidget {
         ),
         title: Text(
           item['name'] ?? item['ssid'],
-          style: TextStyle(color: Theme.of(_context).colorScheme.secondary),
+          style: TextStyle(
+            color: Colors.purpleAccent,
+          ),
         ),
         trailing: Text(item['rssi'].toString()),
         onTap: () {
@@ -48,8 +50,7 @@ class ScanList extends StatelessWidget {
                     height: 80,
                     child: Align(
                         alignment: Alignment.center,
-                        child: SpinKitRipple(
-                            color: Theme.of(_context).textSelectionColor)))),
+                        child: SpinKitRipple(color: Colors.purple)))),
         Expanded(
             child: ListView.separated(
                 shrinkWrap: true,

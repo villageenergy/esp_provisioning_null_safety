@@ -1,21 +1,19 @@
-// esp_provisioning_blue_null_safety_example
+import 'package:esp_provisioning_example/esp_provision_example/wifi_screen/wifi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../scan_list.dart';
-import '../wifi_screen/wifi_screen.dart';
 import 'ble.dart';
 
 class BleScreen extends StatefulWidget {
-  const BleScreen({Key? key}) : super(key: key);
+  BleScreen({Key? key}) : super(key: key);
 
   @override
   _BleScreenState createState() => _BleScreenState();
 }
 
 class _BleScreenState extends State<BleScreen> {
-
   void _showBottomSheet(Map<String, dynamic> item, BuildContext _context) {
     BlocProvider.of<BleBloc>(_context).add(BleEventStopScan());
     BlocProvider.of<BleBloc>(_context).add(BleEventSelect(item));
@@ -25,15 +23,15 @@ class _BleScreenState extends State<BleScreen> {
         backgroundColor: Colors.white,
         isScrollControlled: true,
         elevation: 0,
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
+            topLeft: const Radius.circular(20.0),
+            topRight: const Radius.circular(20.0),
           ),
         ),
         builder: (BuildContext context) {
           return Container(
-            padding: const EdgeInsets.only(top: 5.0),
+            padding: EdgeInsets.only(top: 5.0),
             height: MediaQuery.of(context).size.height - 50,
             child: WiFiScreen(),
           );
@@ -55,7 +53,7 @@ class _BleScreenState extends State<BleScreen> {
         child: BlocBuilder<BleBloc, BleState>(
           builder: (BuildContext context, BleState state) {
             if (state is BleStatePermissionDenied) {
-              return const Center(
+              return Center(
                 child: Text('Please grant location access in "Settings"'),
               );
             }
@@ -67,7 +65,7 @@ class _BleScreenState extends State<BleScreen> {
             }
 
             return Center(
-              child: SpinKitRipple(color: Theme.of(context).textSelectionColor),
+              child: SpinKitRipple(color: Colors.purple),
             );
           },
         ),
