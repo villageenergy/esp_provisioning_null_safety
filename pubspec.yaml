@@ -16,7 +16,8 @@ dependencies:
   cryptography: ^2.0.5
   cryptography_flutter: ^2.0.2
   collection: ^1.15.0
-  flutter_blue_plus: ^1.33.5
+  # flutter_blue_plus: ^1.33.5
+  flutter_blue_plus: ^2.3.12
 
 dev_dependencies:
   flutter_test:
